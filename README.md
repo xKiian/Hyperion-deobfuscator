@@ -14,7 +14,6 @@
 <br>developped by <a href="https://github.com/sfx2me">xKian</a> (me) and <a href="https://github.com/Unleqitq">Unleqitq</a>.
 <br><br>
 </strong>
-<img src="https://cdn.discordapp.com/attachments/939091668261556304/991416492665098261/Capture_decran_2022-06-28_205449.jpg" width="1202", height="642">
 </p>
 <br>
 
