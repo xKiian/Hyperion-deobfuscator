@@ -24,7 +24,7 @@
 <br><br>
 <strong>- not really fast lmao</strong>
 <br>
-<strong>+ it doebfs the file pretty good (about 98%)</strong>
+<strong>+ it deobfs the file pretty good (about 98%)</strong>
 <br>
 <strong>+ Made in about 2hours ( shit code 💀) </strong>
 <br>
