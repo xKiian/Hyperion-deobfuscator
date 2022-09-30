@@ -62,6 +62,9 @@ releasing very soon
 * make it faster
 * add camouflation support
 * auto detect the lines 
+* Add support for shell protection 
+<br>
+I will do some updates ofc, but making a pull request would help lol
 <br><br>
 
 -----
