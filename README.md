@@ -50,6 +50,16 @@ releasing very soon
 * Complexity: 🔴
 * Service: 🟣
 <br><br>
+-----
+
+### <p align="center">🔔 How to use 🔔</p>
+<br><br>
+run main.py
+drag the file in you want to deobf
+you get the file out.py with the clean src
+<br>
+if you have question join my discord
+<br><br>
 
 -----
 
