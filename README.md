@@ -34,10 +34,6 @@ releasing very soon
 <br>
 
 https://user-images.githubusercontent.com/88455386/193406756-75064667-6de5-40c2-a647-5b9dbcbe4ab1.mov
-
-
-<p align="right">
-<img src="https://repository-images.githubusercontent.com/499265392/cdeb5cae-691b-49c7-9f65-56fc01d54813" width="250", height="250">
 </p>
 
 
