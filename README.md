@@ -53,7 +53,7 @@ releasing very soon
 -----
 
 ### <p align="center">🔔 How to use 🔔</p>
-<br><br>
+<br>
 * run main.py
 * drag the file in you want to deobf
 * you get the file out.py with the clean src
