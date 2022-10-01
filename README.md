@@ -58,7 +58,7 @@ releasing very soon
 * drag the file in you want to deobf
 * you get the file out.py with the clean src
 <br>
-if you have question join my discord
+if you have questions join my discord or make an issue
 <br><br>
 
 -----
