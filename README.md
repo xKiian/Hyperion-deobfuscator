@@ -11,7 +11,7 @@
 <br><br>
 <p align="center">
 <strong>
-<br>developped by <a href="https://github.com/sfx2me">xKian</a> (me) and <a href="https://github.com/Unleqitq">Unleqitq</a>.
+<br>developed by <a href="https://github.com/sfx2me">xKian</a> (me) and <a href="https://github.com/Unleqitq">Unleqitq</a>.
  <br>
 releasing very soon
 <br>
