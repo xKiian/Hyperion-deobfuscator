@@ -33,7 +33,11 @@ releasing very soon
 <strong> the code is shit cuz im too lazy, to make it actually good. You can make a pull request if you want :D</strong>
 <br>
 
-https://user-images.githubusercontent.com/88455386/193406756-75064667-6de5-40c2-a647-5b9dbcbe4ab1.mov
+
+
+https://user-images.githubusercontent.com/88455386/193455372-fd819946-0800-42a6-98ed-82e47a0b8926.mov
+
+
 </p>
 
 
