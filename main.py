@@ -31,33 +31,40 @@ text = r"""
                                                                                                              ▀                      """
 
 System.Size(150, 47)
-os.system("cls && title Hyperion Deobfuscator ^| Made by xKian with the help of UnlegitQ ")
+os.system("cls && title Hyperion Deobfuscator ^| Made by xKian and UnlegitQ")
 print("\n\n")
 print(Colorate.Diagonal(Colors.DynamicMIX((purple, dark)), Center.XCenter(text)))
 print("\n\n")
 file = input(stage(f"Drag the file you want to deobfuscate {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('"','').replace("'","")
+if file == "": file = "in.py"
 now = time()
 print("\n")
 p(f"reading file")
 with open(file) as f:
     script = f.read()
-if not "class" in script:
-    p("file is not comouflated")
-    com = False
-    script = script[script.index("b'"):script.rindex("))")]
-else:
-    p("file is comouflated")
-    com, ines = True, []
-    for l in script.splitlines():
-        if r"=b'" in l:
-            p(f"  found code part in {acc}"+ l[:90].replace(" ",""))
-            a = l[l.find("=b'")+len("=b'"):l.rfind("')")]                                                                                                                                               
-            ines.append(a)
-    script1 = ""   
-    for l in ines:
-        script1 += l
-    script = f"b'{script1}'"
-script = zlib.decompress(eval(script)).decode()
+try:
+    if not "class" in script:
+        p("file is not comouflated")
+        com = False
+        script = script[script.index("b'"):script.rindex("))")]
+    else:
+        p("file is comouflated")
+        com, ines = True, []
+        for l in script.splitlines():
+            if r"=b'" in l:
+                p(f"  found code part in {acc}"+ l[:90].replace(" ",""))
+                a = l[l.find("=b'")+len("=b'"):l.rfind("')")]                                                                                                                                               
+                ines.append(a)
+        script1 = ""   
+        for l in ines:
+            script1 += l
+        script = f"b'{script1}'"
+    script = zlib.decompress(eval(script)).decode()
+except Exception as e:
+    p(f"error: {Col.red}{e}{Col.reset}")
+    sleep(3)
+    exit()
+
 
 p("got encrypted code")
 
@@ -91,7 +98,11 @@ def replace(c,r):
     with open('temp.py', 'r') as file :filedata = file.read()
     filedata = filedata.replace(c, r) # i must read the file over and over again, because it updates everytime i replace something
     with open('temp.py', 'w') as file:file.write(filedata)
-
+def rreplace(c,r):
+    p(f"replacing {acc}{c[27:][:20]}... {light} with {r[:40]}")
+    with open('out.py', 'r') as file :filedata = file.read()
+    filedata = filedata.replace(c, r) # i must read the file over and over again, because it updates everytime i replace something
+    with open('out.py', 'w') as file:file.write(filedata)
 #x = int(input(stage(f"open temp.py and type the line where the last globals() is (its 15 in 90% of the cases) {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('"','').replace("'",""))
 x = 15 # ig its always 15, but not sure
 llines = 0
@@ -169,14 +180,26 @@ for l in lines:
 
 p("replacing vars and code")
 os.system("start pythonw deobfuscate.py") # its in a seperate file because its the code from unleqitq
-p("done")
+p("got clean src")
+p("cleaning up")
+sleep(1)
+lines.clear()
+if os.path.exists("out.py"):
+    with open("out.py", "r") as f:
+        script = f.read().splitlines()
+        for line in script:
+            lines.append(line)
+else: print("error")
+p("removing unhexlify stuff")
+for l in lines:
+    if r"binascii.unhexlify" in l and r".decode('8ftu'[::+-+-(-(+1))])" in l:
+        code1 = l[l.index(".unhexlify(b'"):l.rindex(".decode('8ftu'[::+-+-(-(+1))])")]
+        ccode = code1[12:]
+        p(f"got unhexlify code {ccode[:-1][:30]}...")
+        code = eval("__import__('binascii')"+code1+".decode('utf8')")
+        rreplace(f"eval(binascii{code1}.decode('8ftu'[::+-+-(-(+1))]))", code)
+        
 print(stage("your code is in out.py", "!!!", col2 = purple))
 now = round(time() - now, 2)
-sleep(0.5)
-try:
- os.remove("temp.py")
- os.remove("code.py")
- os.remove("vars.py")
-except:pass
 print('\n')
 getpass(stage(f"Obfuscation completed succesfully in {light}{now}s{bpurple}.{Col.reset}", "?", col2 = bpurple))
