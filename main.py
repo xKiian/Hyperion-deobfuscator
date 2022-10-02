@@ -1,67 +1,102 @@
 from pystyle import *
-import zlib, re, os
+import zlib, re, os, base64
+from time import time, sleep
+from getpass import getpass
 dark = Col.dark_gray
-light = Col.light_gray
+light =  Colors.StaticMIX((Col.cyan, Col.purple, Col.gray))
+acc = Colors.StaticMIX((Col.cyan, Col.purple, Col.blue, Col.gray))
 purple = Colors.StaticMIX((Col.purple, Col.blue))
 bpurple = Colors.StaticMIX((Col.purple, Col.cyan))
 
 # The print is from billythegoat356 ( credits to him )
-
 def p(text):
     # sleep(0.05)
     return print(stage(text))
 
-def stage(text: str, symbol: str = '.', col1 = light, col2 = None) -> str:
+def stage(text: str, symbol: str = '...', col1 = light, col2 = None) -> str:
     if col2 is None:
-        col2 = light if symbol == '.' else purple
-    return f""" {Col.Symbol(symbol, col1, dark)} {col2}{text}{Col.reset}"""
+        col2 = light if symbol == '...' else purple
+    if symbol == '...' or symbol == '!!!':
+        return f"""     {Col.Symbol(symbol, col1, dark)} {col2}{text}{Col.reset}"""
+    else:
+        return f""" {Col.Symbol(symbol, col1, dark)} {col2}{text}{Col.reset}"""
 
+text = r"""
+ ▄  █ ▀▄    ▄ █ ▄▄  ▄███▄   █▄▄▄▄ ▄█ ████▄    ▄       ██▄   ▄███▄   ████▄ ███   ▄████ ▄      ▄▄▄▄▄   ▄█▄    ██     ▄▄▄▄▀ ████▄ █▄▄▄▄ 
+█   █   █  █  █   █ █▀   ▀  █  ▄▀ ██ █   █     █      █  █  █▀   ▀  █   █ █  █  █▀   ▀ █    █     ▀▄ █▀ ▀▄  █ █ ▀▀▀ █    █   █ █  ▄▀ 
+██▀▀█    ▀█   █▀▀▀  ██▄▄    █▀▀▌  ██ █   █ ██   █     █   █ ██▄▄    █   █ █ ▀ ▄ █▀▀ █   █ ▄  ▀▀▀▀▄   █   ▀  █▄▄█    █    █   █ █▀▀▌  
+█   █    █    █     █▄   ▄▀ █  █  ▐█ ▀████ █ █  █     █  █  █▄   ▄▀ ▀████ █  ▄▀ █   █   █  ▀▄▄▄▄▀    █▄  ▄▀ █  █   █     ▀████ █  █  
+   █   ▄▀      █    ▀███▀     █    ▐       █  █ █     ███▀  ▀███▀         ███    █  █▄ ▄█            ▀███▀     █  ▀              █   
+  ▀             ▀            ▀             █   ██                                 ▀  ▀▀▀                      █                 ▀    
+                                                                                                             ▀                      """
 
-
+System.Size(150, 47)
+os.system("cls && title Hyperion Deobfuscator ^| Made by xKian with the help of UnlegitQ ")
+print("\n\n")
+print(Colorate.Diagonal(Colors.DynamicMIX((purple, dark)), Center.XCenter(text)))
+print("\n\n")
 file = input(stage(f"Drag the file you want to deobfuscate {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('"','').replace("'","")
-p(f"Reading file")
+now = time()
+print("\n")
+p(f"reading file")
 with open(file) as f:
     script = f.read()
-try:
+if not "class" in script:
+    p("file is not comouflated")
+    com = False
     script = script[script.index("b'"):script.rindex("))")]
-    script = zlib.decompress(eval(script)).decode()
-except:
-    p("The script is camouflated, please wait for the next update or if you have a brain scroll to the right\nand put every b'code' into one big one, \nso your end result will be (b'big code here')) (yes with to closing brackets at the end) and then run the script again.")
-    exit()
-#print(script)
+else:
+    p("file is comouflated")
+    com, ines = True, []
+    for l in script.splitlines():
+        if r"=b'" in l:
+            p(f"  found code part in {acc}"+ l[:90].replace(" ",""))
+            a = l[l.find("=b'")+len("=b'"):l.rfind("')")]                                                                                                                                               
+            ines.append(a)
+    script1 = ""   
+    for l in ines:
+        script1 += l
+    script = f"b'{script1}'"
+script = zlib.decompress(eval(script)).decode()
+
 p("got encrypted code")
 
 lines0 = script.split("\n")
 
 lines = []
 lines.clear()
+p("removing empty lines")
 for line in lines0:
     if len(re.sub(r"\s", "", line)) > 0:
         lines.append(line)
-name = eval(lines[0].split("=")[0][9:-1])
-for i in range(len(lines)):
-    lines[i] = re.sub(fr"^{name}(\W)", r"globals\1", re.sub(fr"(\W){name}(\W)", r"\1globals\2", lines[i]))
-lines.pop(0)
-p("Replacing globals")
+
+p("replacing globals")
 try:
     os.remove("temp.py")
     os.remove("out.py")
     os.remove("code.py")
     os.remove("vars.py")
+    p("removed old files")
 except:pass
-
-
+if com:
+    p("removing credits")  
+    lines = lines[13:] # first 13 lines are credits 
+p("writing second layer to temp.py")
 for line in lines:
-
     with open("temp.py", "a+") as f:
         f.write(line+"\n")
+
 def replace(c,r):
+    p(f"replacing {acc}{c[:40]}... {light} with {r[:40]}")
     with open('temp.py', 'r') as file :filedata = file.read()
     filedata = filedata.replace(c, r) # i must read the file over and over again, because it updates everytime i replace something
     with open('temp.py', 'w') as file:file.write(filedata)
+
 #x = int(input(stage(f"open temp.py and type the line where the last globals() is (its 15 in 90% of the cases) {dark}-> {Col.reset}", "?", col2 = bpurple)).replace('"','').replace("'",""))
 x = 15 # ig its always 15, but not sure
 llines = 0
+p("replacing globals")
+p("replacing vars")
 for l in lines:
     llines += 1
     if not ".join" in l:
@@ -83,7 +118,7 @@ with open("temp.py", "r") as f:
     lines.clear()
     for line in script:
         lines.append(line)
-p("reading temp.py")
+p("replacing classes with strings")
 llines = 0
 for l in lines:
     llines += 1
@@ -113,9 +148,8 @@ with open("temp.py", "r") as f:
     lines.clear()
     for line in script:
         lines.append(line)   
-p("decrypted the rest")
-#y = int(input(stage(f"open temp.py and type the line where the 'from builtins import ...' is {dark}-> {Col.reset}", "?", col2 = bpurple)))
-
+p("splitting code into 2 seperate files")
+p("writing variables to vars.py")
 llines = 0
 for l in lines:
     llines += 1
@@ -124,6 +158,7 @@ for l in lines:
             f.write(l+"\n")
     if llines == y: break
 llines = 0
+p("writing code to code.py")
 for l in lines:
     llines += 1
     if llines >= y:
@@ -132,13 +167,16 @@ for l in lines:
             f.write(l+"\n")
         if llines == len(lines): break
 
-
+p("replacing vars and code")
 os.system("start pythonw deobfuscate.py") # its in a seperate file because its the code from unleqitq
-print(stage("your code is in out.py", "!", col2 = purple))
-x = input(stage(f"do you want to remove the temp files? (y/n) {dark}-> {Col.reset}", "?", col2 = bpurple))
-if x == "y":
-    try:
-        os.remove("temp.py")
-        os.remove("code.py")
-        os.remove("vars.py")
-    except:pass
+p("done")
+print(stage("your code is in out.py", "!!!", col2 = purple))
+now = round(time() - now, 2)
+sleep(0.5)
+try:
+ os.remove("temp.py")
+ os.remove("code.py")
+ os.remove("vars.py")
+except:pass
+print('\n')
+getpass(stage(f"Obfuscation completed succesfully in {light}{now}s{bpurple}.{Col.reset}", "?", col2 = bpurple))

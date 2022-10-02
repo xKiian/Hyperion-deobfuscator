@@ -11,39 +11,32 @@ def deobf(line: str) -> str:
 			return name+"='"+val.replace("\\", "\\\\").replace("'", "\\'").replace("\n","\\n")+"'"
 		if (type(val)==int or type(val) == float or type(val) == bool):
 			return name+"="+str(val)
-	except:
-		pass
+	except:pass
 	return name+"="+val0
-
+variables = {}
+variableNames = []
 lines = []
-fname = "vars.py"
-with open(fname) as file:
+with open("vars.py") as file:
 	lines = file.read().split("\n")
 
-try:
-	os.remove(fname)
-except:
-	pass
+try:os.remove("vars.py")
+except:pass
 
-with open(fname, "a") as file:
+with open("vars.py", "a") as file:
 	for line in lines:
 		try:
 			file.write(deobf(line)+"\n")
 		except:
 			file.write(line+"\n")
-import os
-variables = {}
-variableNames = []
 
-with open(fname) as file:
+with open("vars.py") as file:
     lines = file.read().split("\n")
     for line in lines:
         try:
             name, val = line.split("=", 1)
             variables[name] = val
             variableNames.append(name)
-        except:
-            pass
+        except:pass
 
 variableNames.sort(key=len, reverse=True)
 
