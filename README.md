@@ -24,11 +24,13 @@ releasing very soon
 ### <p align="center">⭐ Features ⭐</p>
 
 <br><br>
-<strong>- not really fast lmao</strong>
+<strong>+ Auto detects wheter the file has comouflation or not </strong>
+<br>
+<strong>+ pretty fast</strong>
 <br>
 <strong>+ it deobfs the file pretty good (about 98%)</strong>
 <br>
-<strong>+ Made in about 2hours ( shit code 💀) </strong>
+<strong>+ Made in about 5hours ( shit code 💀) </strong>
 <br>
 <strong> the code is shit cuz im too lazy, to make it actually good. You can make a pull request if you want :D</strong>
 <br>
@@ -75,7 +77,6 @@ if you have questions join my discord or make an issue
 <br><br>
 * Cleaner code
 * make it faster
-* add camouflation support
 * Add support for shell protection 
 <br>
 I will do some updates ofc, but making a pull request would help lol
