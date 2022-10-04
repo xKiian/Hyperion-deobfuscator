@@ -28,7 +28,9 @@ releasing very soon
 <br>
 <strong>+ pretty fast</strong>
 <br>
-<strong>+ it deobfs the file pretty good (about 98%)</strong>
+<strong>+ it deobfs the file 100%</strong>
+<br>
+<strong>+ Good logging with good gui </strong>
 <br>
 <strong>+ Made in about 5hours ( shit code 💀) </strong>
 <br>
