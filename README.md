@@ -12,7 +12,7 @@
 <p align="center">
 <strong>
 <br>developed by <a href="https://github.com/sfx2me">xKian</a> (me) and <a href="https://github.com/Unleqitq">Unleqitq</a>.
-<br><br><a href="https://discord.com/deobf">best and cheap python deobfuscation service</a>
+<br><br><a href="https://discord.com/deobf">Python deobfuscation service</a>
 <br>
 </strong>
 </p>
