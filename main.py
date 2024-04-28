@@ -171,14 +171,15 @@ for line in lines:
     if llines == x:
         break
 
-llines = 0
-for i in lines:
-    llines += 1
-    if "from builtins import" in str(i):
-        y = llines
+for i, line in enumerate(lines):
+    if "from builtins import" in line:
+        script_start = i
         break
+else:
+    raise RuntimeError(
+        "Could not find script start (missing \"from builtins import\").")
 
-p(f"found script start at line {str(y)}")
+p(f"found script start at line {script_start}")
 
 with open("temp.py", "r") as f:
     script = f.read().splitlines()
@@ -191,7 +192,7 @@ p("writing variables to vars.py")
 llines = 0
 for line in lines:
     llines += 1
-    if llines < y and llines > x:
+    if llines < script_start and llines > x:
         with open("vars.py", "a+") as f:
             f.write(line + "\n")
     if llines == y:
@@ -201,7 +202,7 @@ llines = 0
 p("writing code to code.py")
 for line in lines:
     llines += 1
-    if llines >= y:
+    if llines >= script_start:
         with open("code.py", "a+") as f:
             f.write(line + "\n")
         if llines == len(lines):
